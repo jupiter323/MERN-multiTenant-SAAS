@@ -79,7 +79,7 @@ class NavBar extends React.Component {
                     <a href="" data-toggle="modal" data-target="#modal-about">About: Multi-Tenant Role Based Permissions</a>
                   </li>
                   <li>
-                    <a href="https://github.com/mtimmermann/Boilerplate-Role-Based-Permissions-Nodejs" target="_blank" rel="noopener noreferrer">Source Code on GitHub</a>
+                    <a href="https://github.com/jupitergod/MERN-multiTenant-SAAS" target="_blank" rel="noopener noreferrer">Source Code on GitHub</a>
                   </li>
                 </ul>
               </li>
