@@ -1,0 +1,25 @@
+{
+	"version": "1.0.0",
+	"name": "Multi-Tenant Role Based Permissions Nodejs",
+	"launch_path": "/index.html",
+	"description": "Multi-Tenant role based permissions, local passport authentication",
+	"icons": {
+		"128": "/img/ico/icon-128x128.png"
+	},
+	"developer": {
+		"name": "",
+		"url": ""
+	},
+	"installs_allowed_from": [
+		"*"
+	],
+	"default_locale": "en",
+	"permissions": {
+	},
+	"locales": {
+		"en": {
+			"name": "Multi-Tenant Role Based Permissions Nodejs",
+			"description": "Multi-Tenant role based permissions, local passport authentication"
+		}
+	}
+}
