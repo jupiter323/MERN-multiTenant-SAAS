@@ -7,11 +7,12 @@ const logger = require('../../main/common/logger');
 
 // GET /api/companies
 // List companies, paginations options
-exports.list = function(req, res, next) {
+exports.list = function (req, res, next) {
 
+  var limit = parseInt(req.query['limit'], 10);
   const pageOptions = {
     page: req.query['page'] || 1,
-    limit: req.query['limit'] || 1000,
+    limit: limit || 1000,
     sort: req.query['sort'] || 'name asc'
   };
 
@@ -25,7 +26,7 @@ exports.list = function(req, res, next) {
         });
       }
     } catch (err) {
-      logger.warn('Could not parse \'filter\' param '+ err);
+      logger.warn('Could not parse \'filter\' param ' + err);
     }
   }
 
@@ -45,14 +46,14 @@ exports.list = function(req, res, next) {
 
 
 // GET /api/companies/:id
-exports.find = function(req, res, next) {
+exports.find = function (req, res, next) {
 
   Company.findById(req.params.id, (err, company) => {
     if (err || !company) {
       if (err) logger.error(err);
       return res.status(404).json({
         success: false,
-        errors: [ err ? err.message : `company id '${req.params.id} not found'` ]
+        errors: [err ? err.message : `company id '${req.params.id} not found'`]
       });
     }
 
@@ -66,14 +67,14 @@ exports.find = function(req, res, next) {
 
 // GET /api/companies/subdomain/:subdomain
 // Find Company by subdomain
-exports.findBySubdomain = function(req, res, next) {
+exports.findBySubdomain = function (req, res, next) {
 
   CompanyData.findBySubdomain(req.params.subdomain, (err, company) => {
     if (err) {
       if (err) logger.error(err);
       return res.status(400).json({
         success: false,
-        errors: [ err.message ]
+        errors: [err.message]
       });
     }
 
@@ -87,7 +88,7 @@ exports.findBySubdomain = function(req, res, next) {
 
 // POST /api/companies
 // Add new company
-exports.new = function(req, res, next) {
+exports.new = function (req, res, next) {
   if (!req.body.company || typeof req.body.company !== 'object') {
     return res.status(409).json({ success: false, errors: ['\'company\' param is required'] });
   }
@@ -113,7 +114,7 @@ exports.new = function(req, res, next) {
 };
 
 // PUT /api/companies
-exports.updateCompany = function(req, res, next) {
+exports.updateCompany = function (req, res, next) {
   if (!req.body.company || typeof req.body.company !== 'object') {
     return res.status(409).json({ success: false, errors: ['\'company\' param is required'] });
   }
@@ -134,19 +135,19 @@ exports.updateCompany = function(req, res, next) {
 
 
 // DELETE /api/companies/:id
-exports.destroy = function(req, res, next) {
+exports.destroy = function (req, res, next) {
 
   Company.findByIdAndRemove(req.params.id, (err, company) => {
     if (err || !company) {
       if (err) logger.error(err);
       return res.status(404).json({
         success: false,
-        errors: [ err ? err.message : `company id '${req.params.id} not found'` ]
+        errors: [err ? err.message : `company id '${req.params.id} not found'`]
       });
     }
 
     // Orphan users. Fire and forget
-    orphanUsers(company.id, (err) => {});
+    orphanUsers(company.id, (err) => { });
 
     return res.json({
       success: true,
@@ -159,7 +160,7 @@ exports.destroy = function(req, res, next) {
 function updateCompany(company, callback) {
 
   validateCompany(company, (errValdation, c) => {
-    if (errValdation) return callback (errValdation);
+    if (errValdation) return callback(errValdation);
 
     Company.findOneAndUpdate({ _id: c.id }, c, (err, data) => {
       if (err) return callback(err);
@@ -179,7 +180,7 @@ function updateCompany(company, callback) {
                      data         {object}: The data set of a succesful call
  */
 function orphanUsers(companyId, callback) {
-  User.update({company: companyId}, {company: null}, {multi: true}, (err, results) => {
+  User.update({ company: companyId }, { company: null }, { multi: true }, (err, results) => {
     if (err) {
       logger.error(err);
       return callback(err);
