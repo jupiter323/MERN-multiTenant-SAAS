@@ -14,6 +14,10 @@ import Profile from '../pages/private/profile';
 import ProfilePassword from '../pages/private/profile-password';
 import Private1 from '../pages/private/private1';
 import Admin1 from '../pages/private/admin/admin1';
+import Catalog from '../pages/private/catalog';
+import CatalogNew from '../pages/private/catalog-new';
+import CatalogEdit from './../pages/private/catalog-edit';
+import CatalogDelete from './../pages/private/catalog-delete';
 
 import Users from '../pages/private/admin/users';
 import UserEdit from '../pages/private/admin/user-edit';
@@ -26,6 +30,8 @@ import CompanyEdit from '../pages/private/site-admin/company-edit';
 import CompanyDelete from '../pages/private/site-admin/company-delete';
 
 import Logs from '../pages/private/site-admin/logs';
+
+
 
 class MainRoutes extends React.Component {
   render() {
@@ -42,6 +48,10 @@ class MainRoutes extends React.Component {
             <Route exact path="/profile/password" render={(props) => (<ProfilePassword {...props} user={Auth.getUser()} />)} />
             <Route exact path="/profile" render={(props) => (<Profile {...props} user={Auth.getUser()} />)} />
             <Route exact path="/private1" component={Private1} />
+            <Route exact path="/catalog" userRoles="SiteAdmin,Admin" render={(props) => (<Catalog {...props} role={Auth.getRole()} />)} />
+            <Route exact path="/catalog/new" userRoles="SiteAdmin,Admin" render={(props) => (<CatalogNew {...props} role={Auth.getRole()} />)} />
+            <Route exact path="/catalog/edit/:id" userRoles="SiteAdmin,Admin" render={(props) => (<CatalogEdit {...props} role={Auth.getRole()} />)} />
+            <Route exact path="/catalog/delete/:id" userRoles="SiteAdmin,Admin" render={(props) => (<CatalogDelete {...props} role={Auth.getRole()} />)} />
 
             <Route exact path="/admin1" userRoles="Admin,SiteAdmin" component={Admin1} />
 

@@ -38,7 +38,8 @@ class NavBar extends React.Component {
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav">
               <li><NavLink to="/public1" activeClassName="active">Public</NavLink></li>
-              {isAuthenticated && <li><NavLink to="/private1" activeClassName="active">Private</NavLink></li> }
+              {isAuthenticated && <li><NavLink to="/catalog" activeClassName="active">Catalog</NavLink></li> }
+              {/* {isAuthenticated && <li><NavLink to="/private1" activeClassName="active">private1</NavLink></li> } */}
               {isAuthenticated && user.role === Roles.admin &&
                 <li className="dropdown">
                   <a className="dropdown-toggle" href="#" data-toggle="dropdown">
@@ -61,7 +62,7 @@ class NavBar extends React.Component {
                   <ul className="dropdown-menu">
                     <li><NavLink to="/admin1" activeClassName="active">Admin Page</NavLink></li>
                     <li role="separator" className="divider" />
-                    <li><NavLink to="/siteadmin/companies" activeClassName="active">Company Admin</NavLink></li>
+                    <li><NavLink to="/siteadmin/companies" activeClassName="active">Tenant Admin</NavLink></li>
                     <li><NavLink to="/admin/users" activeClassName="active">All Users</NavLink></li>
                     <li><NavLink to="/siteadmin/companies/unassociated/users" activeClassName="active">Unassociated Users</NavLink></li>
                     <li role="separator" className="divider" />
